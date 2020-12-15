@@ -14,15 +14,15 @@ public class KafkaAvroJavaProducerV1Demo {
 
         Properties properties = new Properties();
         // normal producer
-        properties.put("bootstrap.servers", "c389-node4.coelab.cloudera.com:9092");
+        properties.put("bootstrap.servers", "localhost:9092");
         properties.put("acks", "all");
         properties.put("retries", "10");
         // avro part
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
-        properties.put("security.protocol", "SASL_PLAINTEXT");
-        //properties.setProperty("schema.registry.url", "http://c389-node4.coelab.cloudera.com:7788");
-        properties.putAll(Collections.singletonMap(SchemaRegistryClient.Configuration.SCHEMA_REGISTRY_URL.name(),"http://c389-node4.coelab.cloudera.com:7788/api/v1/"));
+        //properties.put("security.protocol", "SASL_PLAINTEXT");
+        //properties.setProperty("schema.registry.url", "http://localhost:7788");
+        properties.putAll(Collections.singletonMap(SchemaRegistryClient.Configuration.SCHEMA_REGISTRY_URL.name(),"http://localhost:7788/api/v1/"));
         Producer<String, Customer> producer = new KafkaProducer<String, Customer>(properties);
 
         String topic = "schema1";
